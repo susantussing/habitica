@@ -3,7 +3,7 @@ import { authWithHeaders } from '../../middlewares/auth';
 let api = {};
 
 // @TODO export this const, cannot export it from here because only routes are exported from controllers
-const LAST_ANNOUNCEMENT_TITLE = 'NEW GLASS HATCHING POTIONS, AQUATIC HATCHING POTIONS, AND SEAFOAM!';
+const LAST_ANNOUNCEMENT_TITLE = 'AUGUST BACKGROUNDS AND ARMOIRE ITEMS, AND QUEST PARTICIPANTS VIEW!';
 const worldDmg = { // @TODO
   bailey: false,
 };
@@ -26,29 +26,26 @@ api.getNews = {
     res.status(200).send({
       html: `
       <div class="bailey">
-        <div class="media">
-          <div class="align-self-center mr-3 ${baileyClass}"></div>
+        <div class="media align-items-center">
+          <div class="mr-3 ${baileyClass}"></div>
           <div class="media-body">
             <h1 class="align-self-center">${res.t('newStuff')}</h1>
-            <h2>6/26/2018 - ${LAST_ANNOUNCEMENT_TITLE}</h2>
+            <h2>8/2/2018 - ${LAST_ANNOUNCEMENT_TITLE}</h2>
           </div>
         </div>
         <hr/>
         <div class="media align-items-center">
-          <div class="promo_aquatic_glass_potions mr-3"></div>
           <div class="media-body">
-            <h3>New Glass Magic Hatching Potions and the Return of Aquatic Potions!</h3>
-            <p>There's a new pet breed in town! Between now and July 31, you can buy Glass and Aquatic Hatching Potions from <a href='/shops/market' target='_blank'>the Market</a> and use them to hatch any standard pet egg. (Magic Hatching Potions do not work on Quest Pet eggs.) Magic Potion Pets aren't picky, so they'll happily eat any kind of food that you feed them!</p>
-            <p>After they're gone, it will be at least a year before the Glass and Aquatic Hatching Potions are available again, so be sure to get them now!</p>
-            <div class="small mb-3">by stefalupagus, Beffymaroo, Mako413, Willow The Witty, and SabreCat</div>
-            <h3>Seafoam!</h3>
-            <p>Throw some Seafoam at your friends and they will turn into a cheerful sea star until their next cron! You can buy the Seafoam in the <a href='/shops/seasonal' target='_blank'>Seasonal Shop</a> for Gold. Plus, if you get splashed by Seafoam, you'll receive the Aquatic Friends badge!</p>
+            <h3>New Backgrounds and Armoire Items!</h3>
+            <p>We’ve added three new backgrounds to the Background Shop! Now your avatar can fly over a Rocky Canyon, spar on the Training Grounds, and cross a charming Bridge. Check them out under User Icon > Backgrounds!</p>
+            <p>Plus, there’s new Gold-purchasable equipment in the Enchanted Armoire, including the Jeweled Archer Set. Better work hard on your real-life tasks to earn all the pieces! Enjoy :)</p>
+            <div class="small mb-3">by Lalaitha, Kiwibot, Balduranne, Irrevenant, DialFforFunky, RandomGryffindor, Mewrose, and CitrineQuartzFox</div>
+            <h3>New! Quest Partipant List</h3>
+            <p>There's a new feature on your Party Page! If you're in a Quest, you can now view all Party members who have joined the Quest via the Participants link in the box where you can see your progress. Enjoy!</p>
+            <div class="small mb-3">by Alys</div>
           </div>
-          <div class="promo_seafoam ml-3"></div>
+          <div class="promo_armoire_backgrounds_201808 ml-3 mb-3"></div>
         </div>
-        <p>Don't want to be a sea star? Just buy some Sand from your Rewards column to reverse it.</p>
-        <p>Seafoam will be available until July 31st!</p>
-        <div class="small mb-3">by Lemoness</div>
       </div>
       `,
     });

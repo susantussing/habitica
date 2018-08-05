@@ -192,7 +192,6 @@ api.createGroupPlan = {
 
     // @TODO: Change message
     if (group.privacy !== 'private') throw new NotAuthorized(res.t('partyMustbePrivate'));
-    group.memberCount = await User.count({ $or: [{ 'party._id': group._id }, { guilds: group._id }] }).exec();
     group.leader = user._id;
     user.guilds.push(group._id);
 
@@ -378,7 +377,9 @@ api.getGroups = {
 api.getGroup = {
   method: 'GET',
   url: '/groups/:groupId',
-  middlewares: [authWithHeaders()],
+  middlewares: [authWithHeaders({
+    userFieldsToInclude: ['_id', 'party', 'guilds', 'contributor'],
+  })],
   async handler (req, res) {
     let user = res.locals.user;
 
@@ -576,7 +577,8 @@ api.joinGroup = {
     }
     if (!isUserInvited) throw new NotAuthorized(res.t('messageGroupRequiresInvite'));
 
-    if (group.memberCount === 0) group.leader = user._id; // If new user is only member -> set as leader
+    // @TODO: Review the need for this and if still needed, don't base this on memberCount
+    if (!group.hasNotCancelled() && group.memberCount === 0) group.leader = user._id; // If new user is only member -> set as leader
 
     if (group.hasNotCancelled())  {
       await payments.addSubToGroupUser(user, group);

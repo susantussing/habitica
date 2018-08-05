@@ -22,7 +22,7 @@ import {
   sendTxn as txnEmail,
 } from '../../libs/email';
 import Queue from '../../libs/queue';
-import inboxLib from '../../libs/inbox';
+import * as inboxLib from '../../libs/inbox';
 import nconf from 'nconf';
 import get from 'lodash/get';
 
@@ -85,7 +85,7 @@ api.getUser = {
   url: '/user',
   async handler (req, res) {
     let user = res.locals.user;
-    let userToJSON = user.toJSON();
+    let userToJSON = await user.toJSONWithInbox();
 
     // Remove apiToken from response TODO make it private at the user level? returned in signup/login
     delete userToJSON.apiToken;
@@ -485,7 +485,7 @@ api.getUserAnonymized = {
   middlewares: [authWithHeaders()],
   url: '/user/anonymized',
   async handler (req, res) {
-    let user = res.locals.user.toJSON();
+    let user = await res.locals.user.toJSONWithInbox();
     user.stats.toNextLevel = common.tnl(user.stats.lvl);
     user.stats.maxHealth = common.maxHealth;
     user.stats.maxMP = common.statsComputed(res.locals.user).maxMP;
@@ -506,6 +506,10 @@ api.getUserAnonymized = {
     delete user.webhooks;
     delete user.achievements.challenges;
     delete user.notifications;
+
+    _.forEach(user.inbox.messages, (msg) => {
+      msg.text = 'inbox message text';
+    });
 
     _.forEach(user.tags, (tag) => {
       tag.name = 'tag';
@@ -1572,7 +1576,7 @@ api.deleteMessage = {
   async handler (req, res) {
     let user = res.locals.user;
 
-    await inboxLib.clearPMs(user, req.params.id);
+    await inboxLib.deleteMessage(user, req.params.id);
 
     res.respond(200, ...[await inboxLib.getUserInbox(user, false)]);
   },

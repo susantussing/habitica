@@ -8,8 +8,8 @@ const featuredItems = {
       path: 'armoire',
     },
     {
-      type: 'premiumHatchingPotion',
-      path: 'premiumHatchingPotions.Glass',
+      type: 'food',
+      path: 'food.Saddle',
     },
     {
       type: 'food',
@@ -23,7 +23,7 @@ const featuredItems = {
   quests: [
     {
       type: 'quests',
-      path: 'quests.dilatory_derby',
+      path: 'quests.seaserpent',
     },
     {
       type: 'quests',
@@ -34,7 +34,7 @@ const featuredItems = {
       path: 'quests.whale',
     },
   ],
-  seasonal: 'summerRogue',
+  seasonal: '',
   timeTravelers: [
     // TODO
   ],

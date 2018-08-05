@@ -5,6 +5,7 @@ import {
 } from '../../libs/webhook';
 import { removeFromArray } from '../../libs/collectionManipulators';
 import * as Tasks from '../../models/task';
+import { handleSharedCompletion } from '../../libs/groupTasks';
 import { model as Challenge } from '../../models/challenge';
 import { model as Group } from '../../models/group';
 import { model as User } from '../../models/user';
@@ -269,7 +270,7 @@ api.createChallengeTasks = {
  * @apiGroup Task
  *
  * @apiParam (Query) {String="habits","dailys","todos","rewards","completedTodos"} type Optional query parameter to return just a type of tasks. By default all types will be returned except completed todos that must be requested separately. The "completedTodos" type returns only the 30 most recently completed.
- * @apiParam (Query) [dueDate]
+ * @apiParam (Query) [dueDate] type Optional date to use for computing the nextDue field for each returned task.
  *
  * @apiSuccess {Array} data An array of tasks
  *
@@ -282,7 +283,9 @@ api.createChallengeTasks = {
 api.getUserTasks = {
   method: 'GET',
   url: '/tasks/user',
-  middlewares: [authWithHeaders()],
+  middlewares: [authWithHeaders({
+    userFieldsToInclude: ['_id', 'tasksOrder', 'preferences'],
+  })],
   async handler (req, res) {
     let types = Tasks.tasksTypes.map(type => `${type}s`);
     types.push('completedTodos', '_allCompletedTodos'); // _allCompletedTodos is currently in BETA and is likely to be removed in future
@@ -291,10 +294,10 @@ api.getUserTasks = {
     let validationErrors = req.validationErrors();
     if (validationErrors) throw validationErrors;
 
-    let user = res.locals.user;
-    let dueDate = req.query.dueDate;
+    const user = res.locals.user;
+    const dueDate = req.query.dueDate;
 
-    let tasks = await getTasks(req, res, {user, dueDate});
+    const tasks = await getTasks(req, res, { user, dueDate });
     return res.respond(200, tasks);
   },
 };
@@ -478,6 +481,9 @@ api.updateTask = {
     if (sanitizedObj.requiresApproval) {
       task.group.approval.required = true;
     }
+    if (sanitizedObj.sharedCompletion) {
+      task.group.sharedCompletion = sanitizedObj.sharedCompletion;
+    }
 
     setNextDue(task, user);
     let savedTask = await task.save();
@@ -584,7 +590,7 @@ api.scoreTask = {
           groupId: group._id,
           taskId: task._id, // user task id, used to match the notification when the task is approved
           userId: user._id,
-          groupTaskId: task.group.id, // the original task id
+          groupTaskId: task.group.taskId, // the original task id
           direction,
         });
         managerPromises.push(manager.save());
@@ -639,6 +645,12 @@ api.scoreTask = {
       user.save(),
       task.save(),
     ];
+
+    if (task.group && task.group.taskId) {
+      await handleSharedCompletion(task);
+    }
+
+    // Save results and handle request
     if (taskOrderPromise) promises.push(taskOrderPromise);
     let results = await Promise.all(promises);
 

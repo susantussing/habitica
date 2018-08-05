@@ -367,6 +367,22 @@ let armor = {
     set: 'blueHairbow',
     canOwn: ownsItem('armor_armoire_bluePartyDress'),
   },
+  piraticalPrincessGown: {
+    text: t('armorArmoirePiraticalPrincessGownText'),
+    notes: t('armorArmoirePiraticalPrincessGownNotes', { per: 7 }),
+    value: 100,
+    per: 7,
+    set: 'piraticalPrincess',
+    canOwn: ownsItem('armor_armoire_piraticalPrincessGown'),
+  },
+  jeweledArcherArmor: {
+    text: t('armorArmoireJeweledArcherArmorText'),
+    notes: t('armorArmoireJeweledArcherArmorNotes', { con: 15 }),
+    value: 100,
+    con: 15,
+    set: 'jeweledArcher',
+    canOwn: ownsItem('armor_armoire_JeweledArcherArmor'),
+  },
 };
 
 let body = {
@@ -794,6 +810,23 @@ let head = {
     set: 'glassblower',
     canOwn: ownsItem('head_armoire_glassblowersHat'),
   },
+  piraticalPrincessHeaddress: {
+    text: t('headArmoirePiraticalPrincessHeaddressText'),
+    notes: t('headArmoirePiraticalPrincessHeaddressNotes', { attrs: 8 }),
+    value: 100,
+    per: 8,
+    int: 8,
+    set: 'piraticalPrincess',
+    canOwn: ownsItem('head_armoire_piraticalPrincessHeaddress'),
+  },
+  jeweledArcherHelm: {
+    text: t('headArmoireJeweledArcherHelmText'),
+    notes: t('headArmoireJeweledArcherHelmNotes', { int: 15 }),
+    value: 100,
+    int: 15,
+    set: 'jeweledArcher',
+    canOwn: ownsItem('head_armoire_JeweledArcherHelm'),
+  },
 };
 
 let shield = {
@@ -989,6 +1022,15 @@ let shield = {
     int: 6,
     set: 'glassblower',
     canOwn: ownsItem('shield_armoire_fancyBlownGlassVase'),
+  },
+  piraticalSkullShield: {
+    text: t('shieldArmoirePiraticalSkullShieldText'),
+    notes: t('shieldArmoirePiraticalSkullShieldNotes', { attrs: 4 }),
+    value: 100,
+    per: 4,
+    int: 4,
+    set: 'piraticalPrincess',
+    canOwn: ownsItem('shield_armoire_piraticalSkullShield'),
   },
 };
 
@@ -1298,6 +1340,23 @@ let weapon = {
     str: 6,
     set: 'glassblower',
     canOwn: ownsItem('weapon_armoire_glassblowersBlowpipe'),
+  },
+  poisonedGoblet: {
+    text: t('weaponArmoirePoisonedGobletText'),
+    notes: t('weaponArmoirePoisonedGobletNotes', { int: 7 }),
+    value: 100,
+    int: 7,
+    set: 'piraticalPrincess',
+    canOwn: ownsItem('weapon_armoire_poisonedGoblet'),
+  },
+  jeweledArcherBow: {
+    text: t('weaponArmoireJeweledArcherBowText'),
+    notes: t('weaponArmoireJeweledArcherBowNotes', { int: 15 }),
+    twoHanded: true,
+    value: 100,
+    int: 15,
+    set: 'jeweledArcher',
+    canOwn: ownsItem('weapon_armoire_JeweledArcherBow'),
   },
 };
 
