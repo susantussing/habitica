@@ -3,7 +3,7 @@ import { authWithHeaders } from '../../middlewares/auth';
 let api = {};
 
 // @TODO export this const, cannot export it from here because only routes are exported from controllers
-const LAST_ANNOUNCEMENT_TITLE = 'AUGUST BACKGROUNDS AND ARMOIRE ITEMS, AND QUEST PARTICIPANTS VIEW!';
+const LAST_ANNOUNCEMENT_TITLE = 'AUGUST SUBSCRIBER ITEMS AND WIKI SPOTLIGHT ON CUSTOMIZING THE HABITICA EXPERIENCE';
 const worldDmg = { // @TODO
   bailey: false,
 };
@@ -30,21 +30,26 @@ api.getNews = {
           <div class="mr-3 ${baileyClass}"></div>
           <div class="media-body">
             <h1 class="align-self-center">${res.t('newStuff')}</h1>
-            <h2>8/2/2018 - ${LAST_ANNOUNCEMENT_TITLE}</h2>
+            <h2>8/23/2018 - ${LAST_ANNOUNCEMENT_TITLE}</h2>
           </div>
         </div>
         <hr/>
         <div class="media align-items-center">
           <div class="media-body">
-            <h3>New Backgrounds and Armoire Items!</h3>
-            <p>We’ve added three new backgrounds to the Background Shop! Now your avatar can fly over a Rocky Canyon, spar on the Training Grounds, and cross a charming Bridge. Check them out under User Icon > Backgrounds!</p>
-            <p>Plus, there’s new Gold-purchasable equipment in the Enchanted Armoire, including the Jeweled Archer Set. Better work hard on your real-life tasks to earn all the pieces! Enjoy :)</p>
-            <div class="small mb-3">by Lalaitha, Kiwibot, Balduranne, Irrevenant, DialFforFunky, RandomGryffindor, Mewrose, and CitrineQuartzFox</div>
-            <h3>New! Quest Partipant List</h3>
-            <p>There's a new feature on your Party Page! If you're in a Quest, you can now view all Party members who have joined the Quest via the Participants link in the box where you can see your progress. Enjoy!</p>
-            <div class="small mb-3">by Alys</div>
+            <h3>August Subscriber Set Revealed!</h3>
+            <p>Subscriber Items for August have been revealed: the Lava Dragon Item Set! You only have until August 31 to receive the item set when you <a href='/user/settings/subscription' target='_blank'>subscribe</a>. If you're already an active subscriber, reload the site and then head to Inventory > Items to claim your gear!</p>
           </div>
-          <div class="promo_armoire_backgrounds_201808 ml-3 mb-3"></div>
+          <div class="promo_mystery_201808 ml-3"></div>
+        </div>
+        <p>Subscribers also receive the ability to buy Gems for Gold -- the longer you subscribe, the more Gems you can buy per month! There are other perks as well, such as longer access to uncompressed data and a cute Jackalope pet. Best of all, subscriptions let us keep Habitica running. Thank you very much for your support -- it means a lot to us.</p>
+        <div class="small mb-3">by Beffymaroo</div>
+        <div class="media align-items-center">
+          <div class="scene_casting_spells mr-3 mb-3"></div>
+          <div class="media-body">
+            <h3>Blog Post: Creating a Unique Experience</h3>
+            <p>This month's <a href='https://habitica.wordpress.com/2018/08/22/creating-a-unique-experience/' target='_blank'>featured Wiki article</a> is about using Habitica's features to create a unique experience! We hope that it will help you as you customize Habitica to make the app even more motivating and fun. Be sure to check it out, and let us know what you think by reaching out on <a href='https://twitter.com/habitica' target='_blank'>Twitter</a>, <a href='http://blog.habitrpg.com' target='_blank'>Tumblr</a>, and <a href='https://facebook.com/habitica' target='_blank'>Facebook</a>.</p>
+            <div class="small mb-3">by shanaqui and the Wiki Wizards</div>
+          </div>
         </div>
       </div>
       `,

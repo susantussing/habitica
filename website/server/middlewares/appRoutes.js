@@ -34,7 +34,13 @@ app.use('/api/v3', v3Router);
 // A list of v3 routes in the format METHOD-URL to skip
 const v4RouterOverrides = [
   'GET-/user',
+  'PUT-/user',
+  'POST-/user/class/cast/:spellId',
+  'POST-/user/rebirth',
+  'POST-/user/reset',
+  'POST-/user/reroll',
   'GET-/inbox/messages',
+  'POST-/coupons/enter/:code',
 ];
 
 const v4Router = express.Router(); // eslint-disable-line new-cap
